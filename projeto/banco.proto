@@ -1,0 +1,24 @@
+syntax = "proto3";
+service GerenciarBanco {
+    rpc ListaTodosBancos(Empty) returns (BancoLista) {}
+    rpc AdicionaBanco(Banco) returns (Banco) {}
+    rpc AtualizaBanco(Banco) returns (Banco) {}
+}
+
+message ClienteKey {
+    string apikey = 1;
+}
+
+message Empty {}
+
+message BancoLista {
+    repeated Banco bancos = 1;
+}
+
+message Banco {
+    string nome_banco = 1;
+    string tipo_conta = 2;
+    string nome_titular = 3;
+    string limite_cartao = 4; 
+    string apikey = 5; 
+}
