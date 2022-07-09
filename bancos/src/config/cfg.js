@@ -1,6 +1,6 @@
 const PROTO_PATH = "./listabancos.proto";
 
-const grpc = require("grpc");
+const grpc = require("@grpc/grpc-js");
 const carregarProto = require("@grpc/proto-loader");
 
 const definicao = carregarProto.loadSync(PROTO_PATH, {

@@ -5,7 +5,7 @@ const create_token = require("../utils/createtoken");
 const cfg = require("../config/cfg");
 const token_verify = require("../middleware/tokenverify");
 const { v4: uuidv4 } = require("uuid");
-const { token } = require("morgan");
+const grpc = require("@grpc/grpc-js");
 
 const route = express.Router();
 
@@ -61,8 +61,11 @@ route.post("/login", (req, res) => {
         result.email
       );
 
-      client.ListarTodos(null, (error, data) => {
-        if (!error) res.status(200).send({output:"Autenticado",token:token_generated, data:data});
+      const metadata = new grpc.Metadata();
+      metadata.set('token', req.headers['token']);
+
+      client.ListaTodosBancos( {} , metadata, (error, data) => {
+        if (!error) res.status(200).send({output:"Autenticado",token:token_generated, bancos:data.bancos }); 
       })
       
     });

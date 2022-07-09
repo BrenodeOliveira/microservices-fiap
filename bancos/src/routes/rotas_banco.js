@@ -5,7 +5,7 @@ function listaTodosBancos(call, callback) {
     if (login_token(call)) {
         Banco.find((error, result) => {
             if (error) return callback(null, error);
-            return callback(null, {banks: result});
+            return callback(null, {bancos: result});
         });
     } else {
         return callback(new Error('Token não autenticado'), null);
@@ -13,7 +13,7 @@ function listaTodosBancos(call, callback) {
     
 }
 
-function insereBanco(call, callback) {
+function adicionaBanco(call, callback) {
     if (login_token(call)) {
         Banco(call.request)
         .save()
@@ -36,7 +36,7 @@ function atualizaBanco(call, callback) {
 
 const funcoes_grpc = {
     listaTodosBancos,
-    insereBanco,
+    adicionaBanco,
     atualizaBanco
 }
 
